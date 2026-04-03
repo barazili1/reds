@@ -42,7 +42,7 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete, language = 'en'
   }, []); 
 
   const isArabic = language === 'ar';
-  const logoUrl = "https://image2url.com/r2/default/images/1775220016764-cefe3d7b-9bc6-464b-a2ad-62153c543288.png";
+  const logoUrl = "https://image2url.com/r2/default/images/1775222499755-d000a08e-762e-430c-8f50-80c09308ab7c.jpeg";
 
   return (
     <div className={`fixed inset-0 z-[100] flex flex-col items-center justify-center transition-all duration-1000 ease-in-out 
