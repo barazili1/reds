@@ -21,10 +21,10 @@ const SettingsView: React.FC<SettingsViewProps> = ({ onComplete, lang, t, platfo
   const [statusText, setStatusText] = useState("UPLINKING...");
   
   const platformName = platform === 'linebet_v1' ? 'LINEBET V1' : 'LINEBET V2';
-  const platformImg = 'https://image2url.com/r2/default/images/1775220016764-cefe3d7b-9bc6-464b-a2ad-62153c543288.png';
+  const platformImg = 'https://cdn.phototourl.com/free/2026-04-04-95a2dc48-5c19-4193-974d-30590e03443d.png';
 
-  const linebetDownloadUrl = "https://lb-aff.com//L?tag=d_3386416m_66803c_apk1&site=3386416&ad=66803";
-  const xbetDownloadUrl = "https://reffpa.com/L?tag=d_2845435m_27409c_&site=2845435&ad=27409";
+  const linebetDownloadUrl = "https://linebet.com/ar/mobile";
+  const xbetDownloadUrl = "https://linebet.com/ar/mobile";
 
   const [verificationSteps, setVerificationSteps] = useState([
     { id: 'server', label: t.step_server, status: "pending", icon: Server },
