@@ -83,8 +83,8 @@ const PlatformSelection: React.FC<PlatformSelectionProps> = ({ onSelect, t }) =>
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
-      ctx.fillStyle = 'rgba(59, 130, 246, 0.15)';
-      ctx.strokeStyle = 'rgba(59, 130, 246, 0.05)';
+      ctx.fillStyle = 'rgba(34, 197, 94, 0.15)';
+      ctx.strokeStyle = 'rgba(34, 197, 94, 0.05)';
       ctx.lineWidth = 0.5;
 
       particles.forEach((p, i) => {
@@ -190,27 +190,27 @@ const PlatformSelection: React.FC<PlatformSelectionProps> = ({ onSelect, t }) =>
       />
 
       <div className="fixed inset-0 pointer-events-none opacity-[0.03] z-0" 
-           style={{ backgroundImage: 'radial-gradient(#3b82f6 1px, transparent 0)', backgroundSize: '24px 24px' }}></div>
+           style={{ backgroundImage: 'radial-gradient(#22c55e 1px, transparent 0)', backgroundSize: '24px 24px' }}></div>
       
-      <div className="fixed top-4 left-4 w-12 h-12 border-t-2 border-l-2 border-blue-500/30 rounded-tl-xl pointer-events-none z-20"></div>
-      <div className="fixed top-4 right-4 w-12 h-12 border-t-2 border-r-2 border-blue-500/30 rounded-tr-xl pointer-events-none z-20"></div>
-      <div className="fixed bottom-4 left-4 w-12 h-12 border-b-2 border-l-2 border-blue-500/30 rounded-bl-xl pointer-events-none z-20"></div>
-      <div className="fixed bottom-4 right-4 w-12 h-12 border-b-2 border-r-2 border-blue-500/30 rounded-br-xl pointer-events-none z-20"></div>
+      <div className="fixed top-4 left-4 w-12 h-12 border-t-2 border-l-2 border-green-500/30 rounded-tl-xl pointer-events-none z-20"></div>
+      <div className="fixed top-4 right-4 w-12 h-12 border-t-2 border-r-2 border-green-500/30 rounded-tr-xl pointer-events-none z-20"></div>
+      <div className="fixed bottom-4 left-4 w-12 h-12 border-b-2 border-l-2 border-green-500/30 rounded-bl-xl pointer-events-none z-20"></div>
+      <div className="fixed bottom-4 right-4 w-12 h-12 border-b-2 border-r-2 border-green-500/30 rounded-br-xl pointer-events-none z-20"></div>
 
       <div className="text-center mb-10 relative z-10 shrink-0">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-zinc-950 border border-blue-500/20 mb-6 shadow-[0_0_20px_rgba(59,130,246,0.1)]">
-           <Radio className="w-3 h-3 text-blue-500 animate-pulse" />
-           <span className="text-[9px] font-black text-blue-500 tracking-[0.25em] uppercase font-mono">Neural Interface Standby</span>
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-zinc-950 border border-green-500/20 mb-6 shadow-[0_0_20px_rgba(34,197,94,0.1)]">
+           <Radio className="w-3 h-3 text-green-500 animate-pulse" />
+           <span className="text-[9px] font-black text-green-500 tracking-[0.25em] uppercase font-mono">Neural Interface Standby</span>
         </div>
         
         <h2 className="text-5xl font-display font-black text-white tracking-tighter mb-4 leading-none uppercase">
-          PROTOCOL<br/><span className="text-blue-500 drop-shadow-[0_0_10px_rgba(59,130,246,0.5)]">ACCESS</span>
+          PROTOCOL<br/><span className="text-green-500 drop-shadow-[0_0_10px_rgba(34,197,94,0.5)]">ACCESS</span>
         </h2>
         
         <div className="flex items-center justify-center gap-3 opacity-40">
-           <div className="h-[1px] w-8 bg-blue-500"></div>
+           <div className="h-[1px] w-8 bg-green-500"></div>
            <p className="text-[10px] text-zinc-400 font-bold tracking-widest uppercase">Target Selection</p>
-           <div className="h-[1px] w-8 bg-blue-500"></div>
+           <div className="h-[1px] w-8 bg-green-500"></div>
         </div>
       </div>
 
@@ -231,26 +231,26 @@ const PlatformSelection: React.FC<PlatformSelectionProps> = ({ onSelect, t }) =>
             
             <div className={`absolute inset-0 border-2 transition-all duration-500 rounded-[2rem] ${
               selected === p.id 
-                ? 'border-blue-500 shadow-[0_0_50px_rgba(59,130,246,0.25)] scale-[1.02]' 
+                ? 'border-green-500 shadow-[0_0_50px_rgba(34,197,94,0.25)] scale-[1.02]' 
                 : 'border-zinc-900 group-hover:border-zinc-700 hover:scale-[1.01]'
             }`} />
 
             {selected === p.id && (
               <div 
-                className="absolute inset-x-0 h-[1px] bg-blue-500/50 shadow-[0_0_15px_#3b82f6] z-30 pointer-events-none opacity-50"
+                className="absolute inset-x-0 h-[1px] bg-green-500/50 shadow-[0_0_15px_#22c55e] z-30 pointer-events-none opacity-50"
                 style={{ top: `${scanLinePos}%` }}
               />
             )}
 
             <div className="flex items-center p-6 gap-6 relative z-10 transition-transform duration-500 group-active:scale-[0.98]">
-              <div className={`relative w-28 h-28 rounded-2xl overflow-hidden shrink-0 border-2 transition-all duration-500 ${selected === p.id ? 'border-blue-500 shadow-lg' : 'border-zinc-800 grayscale opacity-50 group-hover:opacity-80 group-hover:grayscale-0'}`}>
+              <div className={`relative w-28 h-28 rounded-2xl overflow-hidden shrink-0 border-2 transition-all duration-500 ${selected === p.id ? 'border-green-500 shadow-lg' : 'border-zinc-800 grayscale opacity-50 group-hover:opacity-80 group-hover:grayscale-0'}`}>
                 <img 
                   src={p.img} 
                   alt={p.name} 
                   className={`w-full h-full object-cover transition-transform duration-1000 ${selected === p.id ? 'scale-110' : 'scale-100 group-hover:scale-105'}`} 
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-                <div className={`absolute bottom-2 inset-x-2 py-0.5 rounded-md text-[7px] font-black text-center uppercase tracking-tighter ${selected === p.id ? 'bg-blue-500 text-black' : 'bg-zinc-800 text-zinc-400'}`}>
+                <div className={`absolute bottom-2 inset-x-2 py-0.5 rounded-md text-[7px] font-black text-center uppercase tracking-tighter ${selected === p.id ? 'bg-green-500 text-black' : 'bg-zinc-800 text-zinc-400'}`}>
                    {p.status}
                 </div>
               </div>
@@ -258,13 +258,13 @@ const PlatformSelection: React.FC<PlatformSelectionProps> = ({ onSelect, t }) =>
               <div className="flex-1 space-y-3 min-w-0 transition-all duration-500">
                 <div className="flex items-center justify-between">
                    <h3 className={`text-3xl font-display font-black tracking-tighter transition-colors ${selected === p.id ? 'text-white' : 'text-zinc-600 group-hover:text-zinc-300'}`}>{p.name}</h3>
-                   {selected === p.id && <Zap className="w-5 h-5 text-blue-500 fill-blue-500 animate-pulse" />}
+                   {selected === p.id && <Zap className="w-5 h-5 text-green-500 fill-green-500 animate-pulse" />}
                 </div>
                 
                 <div className="space-y-2">
                    <div className="flex items-center gap-2">
                       <div className="flex-1 h-1 bg-zinc-900 rounded-full overflow-hidden">
-                         <div className={`h-full bg-blue-500 transition-all duration-1000 ${selected === p.id ? 'w-full' : 'w-0'}`}></div>
+                         <div className={`h-full bg-green-500 transition-all duration-1000 ${selected === p.id ? 'w-full' : 'w-0'}`}></div>
                       </div>
                       <span className="text-[8px] font-mono text-zinc-500 tracking-tighter">{p.latency}</span>
                    </div>
@@ -280,25 +280,25 @@ const PlatformSelection: React.FC<PlatformSelectionProps> = ({ onSelect, t }) =>
               </div>
 
               <div className={`w-12 h-12 rounded-2xl border-2 flex items-center justify-center transition-all duration-500 ${
-                selected === p.id ? 'bg-blue-500 border-blue-500 text-black shadow-[0_0_20px_rgba(59,130,246,0.4)] rotate-0' : 'border-zinc-800 text-zinc-800 group-hover:border-zinc-600 group-hover:text-zinc-600'
+                selected === p.id ? 'bg-green-500 border-green-500 text-black shadow-[0_0_20px_rgba(34,197,94,0.4)] rotate-0' : 'border-zinc-800 text-zinc-800 group-hover:border-zinc-600 group-hover:text-zinc-600'
               }`}>
                 {selected === p.id ? <Check className="w-7 h-7 stroke-[4px]" /> : <Lock className="w-5 h-5" />}
               </div>
             </div>
 
-            <div className={`px-6 py-2 border-t flex justify-between items-center bg-black/40 transition-colors z-10 ${selected === p.id ? 'border-blue-500/20' : 'border-zinc-900 group-hover:border-zinc-800'}`}>
+            <div className={`px-6 py-2 border-t flex justify-between items-center bg-black/40 transition-colors z-10 ${selected === p.id ? 'border-green-500/20' : 'border-zinc-900 group-hover:border-zinc-800'}`}>
                 <div className="flex gap-4">
                    <div className="flex items-center gap-1">
-                      <Cpu className={`w-2.5 h-2.5 transition-colors ${selected === p.id ? 'text-blue-500' : 'text-zinc-800 group-hover:text-zinc-600'}`} />
+                      <Cpu className={`w-2.5 h-2.5 transition-colors ${selected === p.id ? 'text-green-500' : 'text-zinc-800 group-hover:text-zinc-600'}`} />
                       <span className="text-[7px] font-mono text-zinc-700 group-hover:text-zinc-500">PROC: V.8.2</span>
                    </div>
                    <div className="flex items-center gap-1">
-                      <Shield className={`w-2.5 h-2.5 transition-colors ${selected === p.id ? 'text-blue-500' : 'text-zinc-800 group-hover:text-zinc-600'}`} />
+                      <Shield className={`w-2.5 h-2.5 transition-colors ${selected === p.id ? 'text-green-500' : 'text-zinc-800 group-hover:text-zinc-600'}`} />
                       <span className="text-[7px] font-mono text-zinc-700 group-hover:text-zinc-500">SEC: ACTIVE</span>
                    </div>
                 </div>
                 <div className="flex items-center gap-1">
-                   <Target className={`w-2.5 h-2.5 transition-all ${selected === p.id ? 'text-blue-500 animate-spin' : 'text-zinc-800 group-hover:text-zinc-600'}`} />
+                   <Target className={`w-2.5 h-2.5 transition-all ${selected === p.id ? 'text-green-500 animate-spin' : 'text-zinc-800 group-hover:text-zinc-600'}`} />
                    <span className="text-[7px] font-mono text-zinc-700 tracking-tighter group-hover:text-zinc-500">BITRATE: 4096 KBPS</span>
                 </div>
             </div>
@@ -307,7 +307,7 @@ const PlatformSelection: React.FC<PlatformSelectionProps> = ({ onSelect, t }) =>
       </div>
 
       <div className="relative z-10 shrink-0 mt-auto pb-4">
-        <div className={`absolute -inset-4 bg-blue-500/10 blur-[40px] rounded-full transition-opacity duration-500 ${selected ? 'opacity-100' : 'opacity-0'}`}></div>
+        <div className={`absolute -inset-4 bg-green-500/10 blur-[40px] rounded-full transition-opacity duration-500 ${selected ? 'opacity-100' : 'opacity-0'}`}></div>
         <button 
           onClick={handleProceed}
           disabled={isConnecting}
@@ -322,19 +322,19 @@ const PlatformSelection: React.FC<PlatformSelectionProps> = ({ onSelect, t }) =>
       {isConnecting && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-2xl animate-in fade-in duration-500 p-6">
            <div className="relative w-full max-sm">
-              <div className="absolute -inset-8 bg-blue-500/10 blur-[80px] rounded-full animate-pulse"></div>
+              <div className="absolute -inset-8 bg-green-500/10 blur-[80px] rounded-full animate-pulse"></div>
               
-              <div className="relative bg-zinc-950 border-2 border-blue-500/20 rounded-[3rem] p-10 overflow-hidden shadow-[0_0_100px_rgba(59,130,246,0.15)] flex flex-col items-center">
+              <div className="relative bg-zinc-950 border-2 border-green-500/20 rounded-[3rem] p-10 overflow-hidden shadow-[0_0_100px_rgba(34,197,94,0.15)] flex flex-col items-center">
                  <div className="absolute top-0 right-0 p-6 opacity-20">
-                    <Terminal className="w-8 h-8 text-blue-500" />
+                    <Terminal className="w-8 h-8 text-green-500" />
                  </div>
 
                  <div className="relative mb-12">
-                    <div className="w-24 h-24 bg-zinc-900 border-2 border-blue-500/30 rounded-[2rem] flex items-center justify-center relative z-10">
-                       <Wifi className="w-12 h-12 text-blue-500 drop-shadow-[0_0_10px_rgba(59,130,246,0.5)] animate-pulse" />
+                    <div className="w-24 h-24 bg-zinc-900 border-2 border-green-500/30 rounded-[2rem] flex items-center justify-center relative z-10">
+                       <Wifi className="w-12 h-12 text-green-500 drop-shadow-[0_0_10px_rgba(34,197,94,0.5)] animate-pulse" />
                     </div>
-                    <div className="absolute -inset-4 border border-dashed border-blue-500/10 rounded-full animate-[spin_15s_linear_infinite]"></div>
-                    <div className="absolute -inset-8 border border-dotted border-blue-500/5 rounded-full animate-[spin_25s_linear_infinite_reverse]"></div>
+                    <div className="absolute -inset-4 border border-dashed border-green-500/10 rounded-full animate-[spin_15s_linear_infinite]"></div>
+                    <div className="absolute -inset-8 border border-dotted border-green-500/5 rounded-full animate-[spin_25s_linear_infinite_reverse]"></div>
                  </div>
 
                  <div className="text-center mb-10 w-full">
@@ -343,8 +343,8 @@ const PlatformSelection: React.FC<PlatformSelectionProps> = ({ onSelect, t }) =>
                        {selectedNode.name}
                     </h2>
                     <div className="flex items-center justify-center gap-2 mb-8">
-                       <div className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-ping"></div>
-                       <span className="text-[9px] font-mono text-blue-500 font-bold tracking-widest uppercase">
+                       <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-ping"></div>
+                       <span className="text-[9px] font-mono text-green-500 font-bold tracking-widest uppercase">
                           IP: {selectedNode.ip}
                        </span>
                     </div>
@@ -354,14 +354,14 @@ const PlatformSelection: React.FC<PlatformSelectionProps> = ({ onSelect, t }) =>
                           <span className="text-[10px] font-black text-white tracking-widest font-mono animate-pulse uppercase">
                              {statusText}
                           </span>
-                          <span className="text-[14px] font-black text-blue-500 font-display">
+                          <span className="text-[14px] font-black text-green-500 font-display">
                              {Math.round(progress)}%
                           </span>
                        </div>
                        
                        <div className="h-4 w-full bg-zinc-900/50 rounded-full border border-white/5 overflow-hidden p-1 shadow-inner relative">
                           <div 
-                            className="h-full bg-gradient-to-r from-blue-600 to-blue-400 rounded-full transition-all duration-100 ease-out relative shadow-[0_0_15px_rgba(59,130,246,0.5)]"
+                            className="h-full bg-gradient-to-r from-green-600 to-green-400 rounded-full transition-all duration-100 ease-out relative shadow-[0_0_15px_rgba(34,197,94,0.5)]"
                             style={{ width: `${progress}%` }}
                           >
                              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full animate-[shimmer_1.5s_infinite]"></div>

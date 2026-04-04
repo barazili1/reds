@@ -105,14 +105,14 @@ export const Grid: React.FC<GridProps> = ({ path, isAnalyzing, predictionId, row
                     }
                   }
                   return (
-                    <div key={`cell-${rowIndex}-${colIndex}`} className={`aspect-[1.2/1] w-full flex items-center justify-center relative rounded-xl transition-all duration-300 ${isVisible && showResult ? (isPath ? 'bg-blue-500/20 border border-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.2)]' : 'bg-zinc-900/50 border border-zinc-800') : 'bg-zinc-900/30 border border-zinc-800/50'}`}>
+                    <div key={`cell-${rowIndex}-${colIndex}`} className={`aspect-[1.2/1] w-full flex items-center justify-center relative rounded-xl transition-all duration-300 ${isVisible && showResult ? (isPath ? 'bg-green-500/20 border border-green-500 shadow-[0_0_15px_rgba(34,197,94,0.2)]' : 'bg-zinc-900/50 border border-zinc-800') : 'bg-zinc-900/30 border border-zinc-800/50'}`}>
                       
                       {isVisible && showResult ? (
                         <MotionDiv initial={{ scale: 0.5, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 0.3 }} className="w-full h-full flex items-center justify-center p-2">
-                          <Apple className={`w-[70%] h-[70%] ${isPath ? 'text-blue-500 fill-blue-500/20' : 'text-zinc-700'}`} />
+                          <Apple className={`w-[70%] h-[70%] ${isPath ? 'text-green-500 fill-green-500/20' : 'text-zinc-700'}`} />
                         </MotionDiv>
                       ) : (
-                        <div className={`w-1.5 h-1.5 rounded-full ${isAnalyzing ? 'bg-blue-500 animate-pulse' : 'bg-zinc-800'}`} />
+                        <div className={`w-1.5 h-1.5 rounded-full ${isAnalyzing ? 'bg-green-500 animate-pulse' : 'bg-zinc-800'}`} />
                       )}
                     </div>
                   );
@@ -123,13 +123,13 @@ export const Grid: React.FC<GridProps> = ({ path, isAnalyzing, predictionId, row
         })}
       </div>
       {isFailure && (
-        <div className="absolute inset-0 z-[60] flex flex-col items-center justify-center bg-black/95 rounded-[2.5rem] p-10 text-center border-2 border-blue-500/30">
-            <div className="w-20 h-20 rounded-3xl bg-blue-500/10 border border-blue-500/40 flex items-center justify-center mb-8">
-                <AlertCircle className="w-10 h-10 text-blue-500" />
+        <div className="absolute inset-0 z-[60] flex flex-col items-center justify-center bg-black/95 rounded-[2.5rem] p-10 text-center border-2 border-green-500/30">
+            <div className="w-20 h-20 rounded-3xl bg-green-500/10 border border-green-500/40 flex items-center justify-center mb-8">
+                <AlertCircle className="w-10 h-10 text-green-500" />
             </div>
             <h3 className="text-xl font-black text-white uppercase mb-3 italic font-en tracking-[0.3em]">LINK_FAILURE</h3>
             <p className="text-zinc-400 text-[9px] font-mono uppercase tracking-[0.25em] max-w-[200px] leading-relaxed mb-8">{t.matrixFailureMsg || 'Matrix link failure detected.'}</p>
-            <button onClick={() => { window.location.reload(); }} className="w-full max-w-[180px] py-5 bg-blue-500 text-black font-black text-[9px] uppercase tracking-[0.4em] rounded-2xl active:scale-95 transition-all flex items-center justify-center gap-3">
+            <button onClick={() => { window.location.reload(); }} className="w-full max-w-[180px] py-5 bg-green-500 text-black font-black text-[9px] uppercase tracking-[0.4em] rounded-2xl active:scale-95 transition-all flex items-center justify-center gap-3">
                 <Scan className="w-4 h-4" />
                 <span>{t.retrySync || 'Retry Sync'}</span>
             </button>

@@ -6,9 +6,7 @@ import { translations } from '../translations';
 import { 
     Zap,
     RotateCcw,
-    Users,
-    Globe,
-    ChevronLeft
+    Users
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -25,11 +23,26 @@ interface AppleGameProps {
 export const AppleGame: React.FC<AppleGameProps> = ({ onBack, accessKeyData, language, onLanguageChange, platform }) => {
   const [gameState, setGameState] = useState<GameState>(GameState.IDLE);
   const [predictionProgress, setPredictionProgress] = useState(0); 
+  const [isInitialLoading, setIsInitialLoading] = useState(true);
+  const [loadingStep, setLoadingStep] = useState(0);
   const t = (translations as any)[language];
   const isRtl = language === 'ar';
   const [onlineUsersCount, setOnlineUsersCount] = useState(() => Math.floor(Math.random() * (1000 - 50 + 1)) + 50);
 
   const [currentResult, setCurrentResult] = useState<PredictionResult | null>(null);
+
+  useEffect(() => {
+    if (isInitialLoading) {
+      const timer1 = setTimeout(() => setLoadingStep(1), 1000);
+      const timer2 = setTimeout(() => setLoadingStep(2), 2000);
+      const timer3 = setTimeout(() => setIsInitialLoading(false), 3000);
+      return () => {
+        clearTimeout(timer1);
+        clearTimeout(timer2);
+        clearTimeout(timer3);
+      };
+    }
+  }, [isInitialLoading]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -108,38 +121,9 @@ export const AppleGame: React.FC<AppleGameProps> = ({ onBack, accessKeyData, lan
             ))}
         </div>
 
-        <header className="fixed top-0 left-0 right-0 z-[100] h-14 bg-black/80 backdrop-blur-md border-b border-blue-500/10 flex items-center justify-between px-6">
-            <div className="flex items-center gap-3 flex-row">
-                <button onClick={() => { playSound('click'); onBack(); }} className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/20 hover:border-blue-500 flex items-center justify-center transition-all active:scale-90 group">
-                    <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-                </button>
-                <div className="flex flex-col items-start">
-                    <div className="border border-blue-500/30 rounded-[8px] px-2 py-1 bg-black/50 flex items-center gap-2.5">
-                        <div className="w-5 h-5 rounded-md overflow-hidden border border-blue-500/40">
-                            <img 
-                                src="https://image2url.com/r2/default/images/1775220016764-cefe3d7b-9bc6-464b-a2ad-62153c543288.png" 
-                                alt="Logo" 
-                                className="w-full h-full object-cover"
-                            />
-                        </div>
-                        <h1 className="text-[9px] font-black text-white tracking-[0.1em] uppercase leading-none font-mono">
-                            UPLINK: <span className="text-white">{accessKeyData?.key || "8963007529"}</span>
-                        </h1>
-                    </div>
-                </div>
-            </div>
-            
-            <div className="flex items-center gap-4">
-                <button onClick={() => { playSound('toggle'); onLanguageChange(language === 'en' ? 'ar' : 'en'); }} className="h-9 px-3 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/20 hover:border-blue-500 active:scale-95 transition-all flex items-center justify-center group">
-                    <Globe className="w-3.5 h-3.5 mr-1.5 text-white group-hover:rotate-180 transition-transform duration-700" />
-                    <span className="text-[9px] font-black uppercase font-mono tracking-tighter">{language === 'en' ? 'AR' : 'EN'}</span>
-                </button>
-            </div>
-        </header>
-
-        <div className={`flex-1 flex flex-col items-center justify-center pt-20 pb-28 px-6 relative z-10 ${isRtl ? 'text-right' : 'text-left'}`}>
+    <div className={`flex-1 flex flex-col items-center justify-center pt-10 pb-28 px-6 relative z-10 ${isRtl ? 'text-right' : 'text-left'} ${isInitialLoading ? 'blur-md' : ''}`}>
             <MotionDiv layout initial={{ scale: 0.98, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="relative mb-12 group z-10 shrink-0 transform-gpu w-full max-w-sm">
-                <div className={`bg-black/40 p-4 rounded-[2.5rem] border transition-all duration-700 overflow-hidden min-h-[150px] flex flex-col justify-center ${isAnalyzing ? 'border-blue-500/50' : 'border-white/10'}`}>
+                <div className={`bg-black/40 p-4 rounded-[2.5rem] border transition-all duration-700 overflow-hidden min-h-[150px] flex flex-col justify-center ${isAnalyzing ? 'border-green-500/50' : 'border-white/10'}`}>
                     <Grid path={currentResult?.path || []} isAnalyzing={isAnalyzing} predictionId={currentResult?.id} onCellClick={() => {}} rowCount={1} difficulty="Hard" gridData={currentResult?.gridData} language={language} />
                 </div>
                 
@@ -155,7 +139,7 @@ export const AppleGame: React.FC<AppleGameProps> = ({ onBack, accessKeyData, lan
                                 <span className="text-[10px] font-black text-white uppercase tracking-[0.3em] animate-pulse">{t.connecting}</span>
                                 <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
                                     <motion.div 
-                                        className="h-full bg-white"
+                                        className="h-full bg-green-500"
                                         initial={{ width: 0 }}
                                         animate={{ width: `${predictionProgress}%` }}
                                     />
@@ -165,9 +149,9 @@ export const AppleGame: React.FC<AppleGameProps> = ({ onBack, accessKeyData, lan
                     )}
                 </AnimatePresence>
 
-                <MotionDiv initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="absolute -bottom-5 left-1/2 -translate-x-1/2 flex items-center gap-5 bg-black border border-blue-500/30 px-6 py-2 rounded-2xl z-30 flex-row">
+                <MotionDiv initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="absolute -bottom-5 left-1/2 -translate-x-1/2 flex items-center gap-5 bg-black border border-green-500/30 px-6 py-2 rounded-2xl z-30 flex-row">
                     <div className="flex items-center gap-2.5 flex-row">
-                        <div className={`w-2 h-2 rounded-full ${isAnalyzing ? 'bg-blue-500' : 'bg-blue-500/40'}`} />
+                        <div className={`w-2 h-2 rounded-full ${isAnalyzing ? 'bg-green-500' : 'bg-green-500/40'}`} />
                         <span className="text-[9px] font-mono text-white tracking-[0.25em] uppercase font-black">{isAnalyzing ? 'SCANNING' : 'LINKED'}</span>
                     </div>
                     <div className="w-px h-4 bg-white/10" />
@@ -180,7 +164,7 @@ export const AppleGame: React.FC<AppleGameProps> = ({ onBack, accessKeyData, lan
 
             <div className="space-y-4 relative z-10 shrink-0 w-full max-w-sm">
                 <div className="grid grid-cols-2 gap-4">
-                    <button onClick={handlePredict} disabled={isAnalyzing} className="h-16 rounded-2xl bg-blue-600 text-white font-black text-xs uppercase tracking-[0.2em] flex items-center justify-center gap-3 active:scale-95 transition-all shadow-lg hover:bg-blue-700 disabled:opacity-50">
+                    <button onClick={handlePredict} disabled={isAnalyzing} className="h-16 rounded-2xl bg-green-600 text-white font-black text-xs uppercase tracking-[0.2em] flex items-center justify-center gap-3 active:scale-95 transition-all shadow-lg hover:bg-green-700 disabled:opacity-50">
                         <Zap className="w-5 h-5" />
                         <span>Start</span>
                     </button>
@@ -191,6 +175,35 @@ export const AppleGame: React.FC<AppleGameProps> = ({ onBack, accessKeyData, lan
                 </div>
             </div>
         </div>
+
+        <AnimatePresence>
+            {isInitialLoading && (
+                <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/40 backdrop-blur-md">
+                    <motion.div 
+                        initial={{ scale: 0.9, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        exit={{ scale: 0.9, opacity: 0 }}
+                        className="w-[130px] h-[80px] bg-zinc-900/90 border border-green-500/30 rounded-xl p-2 flex flex-col items-center justify-center gap-2 shadow-[0_0_30px_rgba(34,197,94,0.2)]"
+                    >
+                        <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden">
+                            <motion.div 
+                                className="h-full bg-green-500"
+                                initial={{ width: "0%" }}
+                                animate={{ width: "100%" }}
+                                transition={{ duration: 3, ease: "linear" }}
+                            />
+                        </div>
+                        <div className="flex flex-col items-center text-center">
+                            <p className="text-[7px] font-bold text-white uppercase tracking-tight leading-tight">
+                                {loadingStep === 0 && (language === 'ar' ? 'جار الاتصال بالسيرفر ...' : 'Connecting to server...')}
+                                {loadingStep === 1 && (language === 'ar' ? 'تم الاتصال بالسيرفر' : 'Connected to server')}
+                                {loadingStep === 2 && (language === 'ar' ? 'جار الاتصال بالid الخاص بك' : 'Connecting to your ID...')}
+                            </p>
+                        </div>
+                    </motion.div>
+                </div>
+            )}
+        </AnimatePresence>
     </div>
   );
 };

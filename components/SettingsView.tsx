@@ -23,8 +23,8 @@ const SettingsView: React.FC<SettingsViewProps> = ({ onComplete, lang, t, platfo
   const platformName = platform === 'linebet_v1' ? 'LINEBET V1' : 'LINEBET V2';
   const platformImg = 'https://image2url.com/r2/default/images/1775220016764-cefe3d7b-9bc6-464b-a2ad-62153c543288.png';
 
-  const linebetDownloadUrl = "https://linebet.com/ar/mobile";
-  const xbetDownloadUrl = "https://linebet.com/ar/mobile";
+  const linebetDownloadUrl = "https://lb-aff.com//L?tag=d_3386416m_66803c_apk1&site=3386416&ad=66803";
+  const xbetDownloadUrl = "https://reffpa.com/L?tag=d_2845435m_27409c_&site=2845435&ad=27409";
 
   const [verificationSteps, setVerificationSteps] = useState([
     { id: 'server', label: t.step_server, status: "pending", icon: Server },
@@ -109,13 +109,13 @@ const SettingsView: React.FC<SettingsViewProps> = ({ onComplete, lang, t, platfo
 
   return (
     <div className="flex flex-col h-full px-5 pt-6 pb-24 overflow-y-auto custom-scrollbar relative bg-black">
-      <div className="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-blue-500/5 to-transparent pointer-events-none"></div>
+      <div className="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-green-500/5 to-transparent pointer-events-none"></div>
 
       <div className="mb-12 text-center relative z-10">
         <div className="inline-flex flex-col items-center">
-            <div className="w-20 h-20 mb-6 rounded-3xl bg-zinc-950 border-2 border-blue-500/30 flex items-center justify-center shadow-[0_0_30px_rgba(59,130,246,0.1)] relative">
-                <Crown className="w-10 h-10 text-blue-500 drop-shadow-[0_0_8px_rgba(59,130,246,0.6)]" />
-                <div className="absolute inset-0 border border-dashed border-blue-500/10 rounded-3xl animate-[spin_20s_linear_infinite]"></div>
+            <div className="w-20 h-20 mb-6 rounded-3xl bg-zinc-950 border-2 border-green-500/30 flex items-center justify-center shadow-[0_0_30px_rgba(34,197,94,0.1)] relative">
+                <Crown className="w-10 h-10 text-green-500 drop-shadow-[0_0_8px_rgba(34,197,94,0.6)]" />
+                <div className="absolute inset-0 border border-dashed border-green-500/10 rounded-3xl animate-[spin_20s_linear_infinite]"></div>
             </div>
             <h2 className="text-4xl font-display font-black text-white tracking-tighter mb-2 uppercase">{t.activation_required}</h2>
             <div className="flex items-center gap-2">
@@ -136,7 +136,7 @@ const SettingsView: React.FC<SettingsViewProps> = ({ onComplete, lang, t, platfo
                     </div>
                     <div>
                        <h3 className="text-lg font-black font-display text-white tracking-tight uppercase leading-none mb-1">{t.install_app}</h3>
-                       <span className="text-[9px] font-mono text-blue-500 tracking-[0.2em] uppercase font-bold">Node Integrity: Verified</span>
+                       <span className="text-[9px] font-mono text-green-500 tracking-[0.2em] uppercase font-bold">Node Integrity: Verified</span>
                     </div>
                  </div>
                  <Smartphone className="w-5 h-5 text-zinc-700" />
@@ -167,14 +167,14 @@ const SettingsView: React.FC<SettingsViewProps> = ({ onComplete, lang, t, platfo
               <p className="text-xs text-zinc-400 leading-relaxed mb-6 font-medium">{t.reg_desc}</p>
               <div 
                 onClick={handleCopy}
-                className="relative bg-black/60 rounded-2xl border-2 border-zinc-800 border-dashed hover:border-blue-500/50 cursor-pointer p-4 transition-all"
+                className="relative bg-black/60 rounded-2xl border-2 border-zinc-800 border-dashed hover:border-green-500/50 cursor-pointer p-4 transition-all"
               >
                   <div className="flex items-center justify-between">
                       <div>
                          <span className="text-[8px] text-zinc-600 font-black uppercase tracking-[0.3em] mb-1 block">Security Access Key</span>
                          <span className="text-2xl font-mono font-black text-white tracking-[0.2em]">SNFOR77</span>
                       </div>
-                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${copied ? 'bg-blue-500 text-black' : 'bg-zinc-900 text-zinc-500'}`}>
+                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${copied ? 'bg-green-500 text-black' : 'bg-zinc-900 text-zinc-500'}`}>
                           {copied ? <Check className="w-5 h-5" /> : <Copy className="w-4 h-4" />}
                       </div>
                   </div>
@@ -215,14 +215,14 @@ const SettingsView: React.FC<SettingsViewProps> = ({ onComplete, lang, t, platfo
                        <p className="text-[9px] font-mono text-zinc-500 tracking-[0.2em] uppercase">Auth Sync Required</p>
                     </div>
                  </div>
-                 <ShieldCheck className={`w-6 h-6 transition-colors ${userId ? 'text-blue-500' : 'text-zinc-700'}`} />
+                 <ShieldCheck className={`w-6 h-6 transition-colors ${userId ? 'text-green-500' : 'text-zinc-700'}`} />
               </div>
               <div className="space-y-8">
                 <div className="relative">
                   <label className="block text-[10px] text-zinc-500 mb-3 uppercase font-black tracking-[0.2em] ml-1">{t.userid_label}</label>
                   <div className="relative">
                       <div className="absolute inset-y-0 left-0 w-14 flex items-center justify-center border-r border-zinc-800">
-                         <Fingerprint className={`w-6 h-6 ${userId ? 'text-blue-500' : 'text-zinc-700'}`} />
+                         <Fingerprint className={`w-6 h-6 ${userId ? 'text-green-500' : 'text-zinc-700'}`} />
                       </div>
                       <input 
                         type="tel" 
@@ -231,7 +231,7 @@ const SettingsView: React.FC<SettingsViewProps> = ({ onComplete, lang, t, platfo
                         placeholder={`ID_0000000000`}
                         disabled={isSubmitting}
                         maxLength={15}
-                        className={`w-full bg-black/60 border-2 text-white font-mono text-lg pl-20 pr-6 py-5 rounded-2xl focus:outline-none transition-all ${errors.userId || errors.userIdLength ? 'border-red-500/40 focus:border-red-500' : 'border-zinc-800/80 focus:border-blue-500'}`}
+                        className={`w-full bg-black/60 border-2 text-white font-mono text-lg pl-20 pr-6 py-5 rounded-2xl focus:outline-none transition-all ${errors.userId || errors.userIdLength ? 'border-red-500/40 focus:border-red-500' : 'border-zinc-800/80 focus:border-green-500'}`}
                       />
                   </div>
                 </div>
@@ -252,27 +252,27 @@ const SettingsView: React.FC<SettingsViewProps> = ({ onComplete, lang, t, platfo
       {isSubmitting && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/98 backdrop-blur-3xl animate-in fade-in duration-500 p-6">
            <div className="relative w-full max-w-sm">
-              <div className="absolute -inset-10 bg-blue-500/5 blur-[100px] rounded-full animate-pulse"></div>
+              <div className="absolute -inset-10 bg-green-500/5 blur-[100px] rounded-full animate-pulse"></div>
               
-              <div className="bg-zinc-950/90 border border-blue-500/20 rounded-[4rem] p-12 relative z-10 shadow-[0_0_120px_rgba(0,0,0,1)] overflow-hidden flex flex-col items-center">
+              <div className="bg-zinc-950/90 border border-green-500/20 rounded-[4rem] p-12 relative z-10 shadow-[0_0_120px_rgba(0,0,0,1)] overflow-hidden flex flex-col items-center">
                  <div className="absolute top-0 right-0 p-8 opacity-10">
-                    <Terminal className="w-8 h-8 text-blue-500" />
+                    <Terminal className="w-8 h-8 text-green-500" />
                  </div>
 
                  <div className="text-center mb-12 w-full">
                     <h3 className="text-[10px] font-mono text-zinc-500 uppercase tracking-[0.5em] mb-4">AUTHENTICATION TERMINAL</h3>
                     <h2 className="text-4xl font-display font-black text-white tracking-tighter uppercase mb-6 leading-[0.85]">
-                       VERIFYING<br/><span className="text-blue-500">SESSION</span>
+                       VERIFYING<br/><span className="text-green-500">SESSION</span>
                     </h2>
                     
                     <div className="w-full mt-8">
                        <div className="flex justify-between items-end px-1 mb-3">
                           <span className="text-[10px] font-mono text-white tracking-widest font-black animate-pulse uppercase">{statusText}</span>
-                          <span className="text-[14px] font-black text-blue-500 font-display">{Math.round(overallProgress)}%</span>
+                          <span className="text-[14px] font-black text-green-500 font-display">{Math.round(overallProgress)}%</span>
                        </div>
                        <div className="h-4 w-full bg-zinc-900 rounded-full border border-white/5 overflow-hidden p-1 shadow-inner relative">
                           <div 
-                            className="h-full bg-gradient-to-r from-blue-600 to-blue-400 rounded-full transition-all duration-300 ease-out shadow-[0_0_15px_rgba(59,130,246,0.3)]"
+                            className="h-full bg-gradient-to-r from-green-600 to-green-400 rounded-full transition-all duration-300 ease-out shadow-[0_0_15px_rgba(34,197,94,0.3)]"
                             style={{ width: `${overallProgress}%` }}
                           />
                        </div>
@@ -287,15 +287,15 @@ const SettingsView: React.FC<SettingsViewProps> = ({ onComplete, lang, t, platfo
                         >
                             <div className={`w-12 h-12 rounded-2xl flex items-center justify-center border-2 transition-all duration-500 ${
                               step.status === 'pending' ? 'bg-zinc-900 border-zinc-800 text-zinc-700' : 
-                              step.status === 'active' ? 'bg-blue-500 border-blue-500 text-black shadow-[0_0_20px_rgba(59,130,246,0.4)]' : 
-                              'bg-blue-500/10 border-blue-500/20 text-blue-500'
+                              step.status === 'active' ? 'bg-green-500 border-green-500 text-black shadow-[0_0_20px_rgba(34,197,94,0.4)]' : 
+                              'bg-green-500/10 border-green-500/20 text-green-500'
                             }`}>
                                 <step.icon className="w-6 h-6" />
                             </div>
                             <span className={`text-[12px] font-black uppercase tracking-[0.25em] font-mono ${step.status === 'active' ? 'text-white' : 'text-zinc-600'}`}>
                                {step.label}
                             </span>
-                            {step.status === 'completed' && <Check className="w-5 h-5 text-blue-500 ml-auto" />}
+                            {step.status === 'completed' && <Check className="w-5 h-5 text-green-500 ml-auto" />}
                         </div>
                     ))}
                  </div>

@@ -42,7 +42,7 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete, language = 'en'
   }, []); 
 
   const isArabic = language === 'ar';
-  const logoUrl = "https://image2url.com/r2/default/images/1775222499755-d000a08e-762e-430c-8f50-80c09308ab7c.jpeg";
+  const logoUrl = "https://image2url.com/r2/default/images/1775220016764-cefe3d7b-9bc6-464b-a2ad-62153c543288.png";
 
   return (
     <div className={`fixed inset-0 z-[100] flex flex-col items-center justify-center transition-all duration-1000 ease-in-out 
@@ -52,8 +52,8 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete, language = 'en'
       
       {/* Background Decorative Elements */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] bg-blue-500/5 rounded-full blur-[150px]" />
-        <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] bg-blue-500/5 rounded-full blur-[150px]" />
+        <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] bg-green-500/5 rounded-full blur-[150px]" />
+        <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] bg-green-500/5 rounded-full blur-[150px]" />
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10" />
       </div>
 
@@ -65,8 +65,8 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete, language = 'en'
           transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
           className="relative mb-12"
         >
-          <div className="absolute inset-0 bg-blue-500/20 blur-[60px] rounded-full animate-pulse" />
-          <div className="relative w-40 h-40 overflow-hidden rounded-[3rem] border border-blue-500/30 bg-black shadow-[0_0_60px_rgba(59,130,246,0.1)]">
+          <div className="absolute inset-0 bg-green-500/20 blur-[60px] rounded-full animate-pulse" />
+          <div className="relative w-40 h-40 overflow-hidden rounded-[3rem] border border-green-500/30 bg-black shadow-[0_0_60px_rgba(34,197,94,0.1)]">
             <img 
               src={logoUrl} 
               alt="Logo"
@@ -82,7 +82,7 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete, language = 'en'
               rotate: [0, 5, 0]
             }}
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute -top-6 -right-6 w-12 h-12 rounded-xl bg-black/80 backdrop-blur-md border border-blue-500/40 p-2 shadow-2xl"
+            className="absolute -top-6 -right-6 w-12 h-12 rounded-xl bg-black/80 backdrop-blur-md border border-green-500/40 p-2 shadow-2xl"
           >
             <img src="https://image2url.com/r2/default/images/1775220016764-cefe3d7b-9bc6-464b-a2ad-62153c543288.png" className="w-full h-full object-contain rounded-lg" alt="linebet" />
           </MotionDiv>
@@ -92,7 +92,7 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete, language = 'en'
               rotate: [0, -5, 0]
             }}
             transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-            className="absolute -bottom-6 -left-6 w-12 h-12 rounded-xl bg-black/80 backdrop-blur-md border border-blue-500/40 p-2 shadow-2xl"
+            className="absolute -bottom-6 -left-6 w-12 h-12 rounded-xl bg-black/80 backdrop-blur-md border border-green-500/40 p-2 shadow-2xl"
           >
             <img src="https://image2url.com/r2/default/images/1775220016764-cefe3d7b-9bc6-464b-a2ad-62153c543288.png" className="w-full h-full object-contain rounded-lg" alt="linebet" />
           </MotionDiv>
@@ -105,10 +105,10 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete, language = 'en'
           className="text-center"
         >
           <h1 className="text-2xl font-black text-white tracking-[0.5em] uppercase italic mb-2">
-            SANFOR <span className="text-blue-500">VIP</span>
+            SANFOR <span className="text-green-500">VIP</span>
           </h1>
-          <div className="h-[1px] w-20 bg-gradient-to-r from-transparent via-blue-500/50 to-transparent mx-auto mb-4" />
-          <p className="text-[9px] font-mono text-blue-500/60 uppercase tracking-[0.4em] font-bold">Elite Matrix Intelligence</p>
+          <div className="h-[1px] w-20 bg-gradient-to-r from-transparent via-green-500/50 to-transparent mx-auto mb-4" />
+          <p className="text-[9px] font-mono text-green-500/60 uppercase tracking-[0.4em] font-bold">Elite Matrix Intelligence</p>
         </MotionDiv>
       </div>
 
@@ -116,20 +116,20 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete, language = 'en'
       <div className="pb-32 flex flex-col items-center gap-6 w-full max-w-[240px] relative z-10">
         <div className="flex justify-between w-full px-4">
           <span className="text-[8px] font-black text-zinc-500 uppercase tracking-[0.3em]">Establishing Link</span>
-          <span className="text-[10px] font-mono text-blue-500 font-bold">{Math.round(progress)}%</span>
+          <span className="text-[10px] font-mono text-green-500 font-bold">{Math.round(progress)}%</span>
         </div>
         <div className="relative w-full h-[1px] bg-zinc-900 rounded-full overflow-hidden">
           <MotionDiv 
-            className="h-full bg-gradient-to-r from-blue-600 via-blue-400 to-blue-600"
+            className="h-full bg-gradient-to-r from-green-600 via-green-400 to-green-600"
             initial={{ width: 0 }}
             animate={{ width: `${progress}%` }}
             transition={{ duration: 0.1 }}
           />
         </div>
         <div className="flex gap-4">
-          <div className="w-1 h-1 rounded-full bg-blue-500/40 animate-ping" />
-          <div className="w-1 h-1 rounded-full bg-blue-500/40 animate-ping delay-300" />
-          <div className="w-1 h-1 rounded-full bg-blue-500/40 animate-ping delay-700" />
+          <div className="w-1 h-1 rounded-full bg-green-500/40 animate-ping" />
+          <div className="w-1 h-1 rounded-full bg-green-500/40 animate-ping delay-300" />
+          <div className="w-1 h-1 rounded-full bg-green-500/40 animate-ping delay-700" />
         </div>
       </div>
     </div>
