@@ -123,13 +123,20 @@ export const AppleGame: React.FC<AppleGameProps> = ({ onBack, accessKeyData, lan
         </div>
 
     <div className={`flex-1 flex flex-col items-center justify-center pt-10 pb-28 px-6 relative z-10 ${isRtl ? 'text-right' : 'text-left'} ${isInitialLoading ? 'blur-md' : ''}`}>
-            <div className="w-full max-w-[280px] mb-6 rounded-2xl overflow-hidden border border-green-500/20 shadow-[0_0_20px_rgba(34,197,94,0.1)]">
-                <img 
-                    src="https://cdn.phototourl.com/free/2026-04-04-4833d251-87ac-4c88-a5ba-234f97e1dc5c.jpg" 
-                    alt="Apple Game Banner" 
-                    className="w-full h-auto object-cover"
-                    referrerPolicy="no-referrer"
-                />
+            <div className="w-full max-w-sm mb-8 flex items-center gap-4 px-4" dir="rtl">
+                <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-green-500 shadow-[0_0_15px_rgba(34,197,94,0.3)] shrink-0">
+                    <img 
+                        src="https://cdn.phototourl.com/free/2026-04-04-1842e411-b72f-4410-93d1-06b60a530d33.jpg" 
+                        alt="Promo" 
+                        className="w-full h-full object-cover"
+                        referrerPolicy="no-referrer"
+                    />
+                </div>
+                <div className="flex flex-col text-right">
+                    <p className="text-white text-[13px] font-bold leading-tight">لضمان تشغيل الهاك سجل الان</p>
+                    <p className="text-white text-[13px] font-bold leading-tight">علي LINEBET بالبروموكود</p>
+                    <p className="text-green-500 text-xl font-black tracking-widest mt-0.5">SNFOR77</p>
+                </div>
             </div>
 
             <MotionDiv layout initial={{ scale: 0.98, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="relative mb-12 group z-10 shrink-0 transform-gpu w-full max-w-sm">
