@@ -84,7 +84,7 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete, language = 'en'
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
             className="absolute -top-6 -right-6 w-12 h-12 rounded-xl bg-black/80 backdrop-blur-md border border-green-500/40 p-2 shadow-2xl"
           >
-            <img src="https://image2url.com/r2/default/images/1775220016764-cefe3d7b-9bc6-464b-a2ad-62153c543288.png" className="w-full h-full object-contain rounded-lg" alt="linebet" />
+            <img src="https://cdn.phototourl.com/free/2026-04-04-95a2dc48-5c19-4193-974d-30590e03443d.png" className="w-full h-full object-contain rounded-lg" alt="linebet" />
           </MotionDiv>
           <MotionDiv 
             animate={{ 
@@ -94,7 +94,7 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete, language = 'en'
             transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
             className="absolute -bottom-6 -left-6 w-12 h-12 rounded-xl bg-black/80 backdrop-blur-md border border-green-500/40 p-2 shadow-2xl"
           >
-            <img src="https://image2url.com/r2/default/images/1775220016764-cefe3d7b-9bc6-464b-a2ad-62153c543288.png" className="w-full h-full object-contain rounded-lg" alt="linebet" />
+            <img src="https://cdn.phototourl.com/free/2026-04-04-95a2dc48-5c19-4193-974d-30590e03443d.png" className="w-full h-full object-contain rounded-lg" alt="linebet" />
           </MotionDiv>
         </MotionDiv>
 
