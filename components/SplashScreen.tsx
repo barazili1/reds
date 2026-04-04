@@ -42,7 +42,8 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete, language = 'en'
   }, []); 
 
   const isArabic = language === 'ar';
-  const logoUrl = "https://cdn.phototourl.com/free/2026-04-04-c5f435ce-62d4-4683-90d1-5895be1e9487.jpg";
+  const logoUrl = "https://cdn.phototourl.com/free/2026-04-04-88492ee7-7bb2-41fb-8bc0-efc10a76436f.jpg";
+  const platformIconUrl = "https://cdn.phototourl.com/free/2026-04-04-99a59818-566a-4094-ab33-2691af5a6756.png";
 
   return (
     <div className={`fixed inset-0 z-[100] flex flex-col items-center justify-center transition-all duration-1000 ease-in-out 
@@ -84,7 +85,7 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete, language = 'en'
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
             className="absolute -top-6 -right-6 w-12 h-12 rounded-xl bg-black/80 backdrop-blur-md border border-green-500/40 p-2 shadow-2xl"
           >
-            <img src="https://cdn.phototourl.com/free/2026-04-04-95a2dc48-5c19-4193-974d-30590e03443d.png" className="w-full h-full object-contain rounded-lg" alt="linebet" />
+            <img src={platformIconUrl} className="w-full h-full object-contain rounded-lg" alt="linebet" />
           </MotionDiv>
           <MotionDiv 
             animate={{ 
@@ -94,7 +95,7 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete, language = 'en'
             transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
             className="absolute -bottom-6 -left-6 w-12 h-12 rounded-xl bg-black/80 backdrop-blur-md border border-green-500/40 p-2 shadow-2xl"
           >
-            <img src="https://cdn.phototourl.com/free/2026-04-04-95a2dc48-5c19-4193-974d-30590e03443d.png" className="w-full h-full object-contain rounded-lg" alt="linebet" />
+            <img src={platformIconUrl} className="w-full h-full object-contain rounded-lg" alt="linebet" />
           </MotionDiv>
         </MotionDiv>
 

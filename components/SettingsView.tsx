@@ -21,7 +21,7 @@ const SettingsView: React.FC<SettingsViewProps> = ({ onComplete, lang, t, platfo
   const [statusText, setStatusText] = useState("UPLINKING...");
   
   const platformName = platform === 'linebet_v1' ? 'LINEBET V1' : 'LINEBET V2';
-  const platformImg = 'https://cdn.phototourl.com/free/2026-04-04-95a2dc48-5c19-4193-974d-30590e03443d.png';
+  const platformImg = 'https://cdn.phototourl.com/free/2026-04-04-99a59818-566a-4094-ab33-2691af5a6756.png';
 
   const linebetDownloadUrl = "https://linebet.com/ar/mobile";
   const xbetDownloadUrl = "https://linebet.com/ar/mobile";

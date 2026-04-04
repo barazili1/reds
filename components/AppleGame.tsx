@@ -6,7 +6,8 @@ import { translations } from '../translations';
 import { 
     Zap,
     RotateCcw,
-    Users
+    Users,
+    Send
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -122,6 +123,15 @@ export const AppleGame: React.FC<AppleGameProps> = ({ onBack, accessKeyData, lan
         </div>
 
     <div className={`flex-1 flex flex-col items-center justify-center pt-10 pb-28 px-6 relative z-10 ${isRtl ? 'text-right' : 'text-left'} ${isInitialLoading ? 'blur-md' : ''}`}>
+            <div className="w-full max-w-[280px] mb-6 rounded-2xl overflow-hidden border border-green-500/20 shadow-[0_0_20px_rgba(34,197,94,0.1)]">
+                <img 
+                    src="https://cdn.phototourl.com/free/2026-04-04-4833d251-87ac-4c88-a5ba-234f97e1dc5c.jpg" 
+                    alt="Apple Game Banner" 
+                    className="w-full h-auto object-cover"
+                    referrerPolicy="no-referrer"
+                />
+            </div>
+
             <MotionDiv layout initial={{ scale: 0.98, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="relative mb-12 group z-10 shrink-0 transform-gpu w-full max-w-sm">
                 <div className={`bg-black/40 p-4 rounded-[2.5rem] border transition-all duration-700 overflow-hidden min-h-[150px] flex flex-col justify-center ${isAnalyzing ? 'border-green-500/50' : 'border-white/10'}`}>
                     <Grid path={currentResult?.path || []} isAnalyzing={isAnalyzing} predictionId={currentResult?.id} onCellClick={() => {}} rowCount={1} difficulty="Hard" gridData={currentResult?.gridData} language={language} />
@@ -173,6 +183,16 @@ export const AppleGame: React.FC<AppleGameProps> = ({ onBack, accessKeyData, lan
                         <span>Restart</span>
                     </button>
                 </div>
+
+                <a 
+                    href="https://t.me/+9lJE8gGxwpozY2M0" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-3 p-4 rounded-2xl bg-[#0088cc]/10 border border-[#0088cc]/30 text-[#0088cc] hover:bg-[#0088cc]/20 transition-all group mt-8"
+                >
+                    <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                    <span className="text-xs font-bold uppercase tracking-wider">انضم الي مجتمعنا في تلجرام</span>
+                </a>
             </div>
         </div>
 

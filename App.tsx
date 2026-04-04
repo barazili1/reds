@@ -36,8 +36,8 @@ const App: React.FC = () => {
   const isArabic = lang === 'ar';
 
   const PLATFORM_IMAGES: Record<Platform, string> = {
-    linebet_v1: 'https://image2url.com/r2/default/images/1775220016764-cefe3d7b-9bc6-464b-a2ad-62153c543288.png',
-    linebet_v2: 'https://image2url.com/r2/default/images/1775220016764-cefe3d7b-9bc6-464b-a2ad-62153c543288.png'
+    linebet_v1: 'https://cdn.phototourl.com/free/2026-04-04-99a59818-566a-4094-ab33-2691af5a6756.png',
+    linebet_v2: 'https://cdn.phototourl.com/free/2026-04-04-99a59818-566a-4094-ab33-2691af5a6756.png'
   };
 
   useEffect(() => {

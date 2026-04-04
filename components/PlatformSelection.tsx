@@ -29,7 +29,7 @@ const PlatformSelection: React.FC<PlatformSelectionProps> = ({ onSelect, t }) =>
     {
       id: 'linebet_v1' as Platform,
       name: 'LINEBET V1',
-      img: 'https://cdn.phototourl.com/free/2026-04-04-95a2dc48-5c19-4193-974d-30590e03443d.png',
+      img: 'https://cdn.phototourl.com/free/2026-04-04-99a59818-566a-4094-ab33-2691af5a6756.png',
       tagline: 'STRATEGIC NODE: ALPHA',
       status: 'OPTIMIZED',
       latency: '14ms',
@@ -39,7 +39,7 @@ const PlatformSelection: React.FC<PlatformSelectionProps> = ({ onSelect, t }) =>
     {
       id: 'linebet_v2' as Platform,
       name: 'LINEBET V2',
-      img: 'https://cdn.phototourl.com/free/2026-04-04-95a2dc48-5c19-4193-974d-30590e03443d.png',
+      img: 'https://cdn.phototourl.com/free/2026-04-04-99a59818-566a-4094-ab33-2691af5a6756.png',
       tagline: 'STRATEGIC NODE: BRAVO',
       status: 'VERIFIED',
       latency: '18ms',
