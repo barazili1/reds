@@ -11,7 +11,7 @@ import { audioManager } from './utils/audioManager';
 const App: React.FC = () => {
   const [view, setView] = useState<ViewState>('splash');
   const [activeTab, setActiveTab] = useState<'info' | 'conditions' | 'platform'>('platform');
-  const [lang, setLang] = useState<Language>('en');
+  const [lang, setLang] = useState<Language>('ar');
   const [userId, setUserId] = useState<string>('');
   const [selectedPlatform, setSelectedPlatform] = useState<Platform>('linebet_v1');
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
@@ -20,11 +20,11 @@ const App: React.FC = () => {
   const rawT = translations[lang];
   
   const processTranslations = (obj: any): any => {
-    const platformName = selectedPlatform.startsWith('linebet') ? 'Linebet' : '1xBet';
+    const platformName = selectedPlatform === 'linebet_v1' ? 'WINWIN' : 'GOOBET';
     const newT: any = {};
     for (const key in obj) {
       if (typeof obj[key] === 'string') {
-        newT[key] = obj[key].replace(/1xBet/gi, platformName);
+        newT[key] = obj[key].replace(/1xBet|Linebet/gi, platformName);
       } else {
         newT[key] = obj[key];
       }
@@ -35,9 +35,22 @@ const App: React.FC = () => {
   const t = processTranslations(rawT);
   const isArabic = lang === 'ar';
 
+  useEffect(() => {
+    const root = document.documentElement;
+    if (selectedPlatform === 'linebet_v2') {
+      root.style.setProperty('--primary-color', '#3b82f6');
+      root.style.setProperty('--primary-color-rgb', '59, 130, 246');
+      root.style.setProperty('--primary-glow', 'rgba(59, 130, 246, 0.5)');
+    } else {
+      root.style.setProperty('--primary-color', '#22c55e');
+      root.style.setProperty('--primary-color-rgb', '34, 197, 94');
+      root.style.setProperty('--primary-glow', 'rgba(34, 197, 94, 0.5)');
+    }
+  }, [selectedPlatform]);
+
   const PLATFORM_IMAGES: Record<Platform, string> = {
-    linebet_v1: 'https://cdn.phototourl.com/free/2026-04-04-99a59818-566a-4094-ab33-2691af5a6756.png',
-    linebet_v2: 'https://cdn.phototourl.com/free/2026-04-04-99a59818-566a-4094-ab33-2691af5a6756.png'
+    linebet_v1: 'https://www.image2url.com/r2/default/images/1776200504700-76a44e57-f905-48c8-b91c-bd0939ae4633.jpeg',
+    linebet_v2: 'https://www.image2url.com/r2/default/images/1776200548040-627ffa09-024d-4f16-9b09-e24dc2f6b697.png'
   };
 
   useEffect(() => {
@@ -101,7 +114,15 @@ const App: React.FC = () => {
           />
         );
       case 'conditions':
-        return <SettingsView onComplete={handleConditionsSubmit} lang={lang} t={t} platform={selectedPlatform} />;
+        return (
+          <SettingsView 
+            onComplete={handleConditionsSubmit} 
+            onBack={handleBack}
+            lang={lang} 
+            t={t} 
+            platform={selectedPlatform} 
+          />
+        );
       default:
         return (
           <AppleGame 
@@ -116,94 +137,21 @@ const App: React.FC = () => {
   };
 
   return (
-    <div dir="ltr" className={isArabic ? 'font-arabic' : 'font-sans'}>
+    <div dir={isArabic ? 'rtl' : 'ltr'} className={isArabic ? 'font-arabic' : 'font-sans'}>
       {view === 'splash' && <SplashScreen onComplete={handleSplashComplete} language={lang} />}
       
       <div 
         className={`fixed inset-0 bg-black text-white flex flex-col transition-opacity duration-1000 ${view === 'splash' ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
       >
-        <header className="px-6 py-4 flex items-center justify-between border-b border-green-500/10 bg-black/80 backdrop-blur-md z-20 shrink-0">
-          <div className="flex items-center gap-4">
-            {view !== 'platform_selection' && (
-              <button 
-                onClick={handleBack}
-                className="p-2 rounded-lg bg-zinc-900/50 border border-zinc-800 hover:border-green-500/50 hover:text-green-500 transition-all group active:scale-90"
-                aria-label="Go back"
-              >
-                <ArrowLeft className="w-4 h-4 text-zinc-400 group-hover:text-green-500 transition-colors" />
-              </button>
-            )}
-            
-            {view === 'info' ? (
-              <div className="flex items-center gap-2.5">
-                <div className="border border-green-500/30 rounded-[8px] px-2 py-1 bg-black/50 flex items-center gap-2.5">
-                    <div className="w-5 h-5 rounded-md overflow-hidden border border-green-500/40">
-                        <img 
-                            src={PLATFORM_IMAGES[selectedPlatform]} 
-                            alt={selectedPlatform} 
-                            className="w-full h-full object-cover"
-                        />
-                    </div>
-                    <h1 className="text-[10px] font-black text-white tracking-[0.1em] uppercase leading-none font-mono">
-                        ID: <span className="text-green-500">{accessKeyData?.key || "8963007529"}</span> | <span className="text-white">{selectedPlatform.replace('_', ' ').toUpperCase()}</span>
-                    </h1>
-                </div>
-              </div>
-            ) : (
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_10px_#22c55e] animate-pulse"></div>
-                <span className="font-display font-bold text-xl tracking-tighter text-white">
-                  SANFOR<span className="text-green-500">VIP</span>
-                </span>
-              </div>
-            )}
-          </div>
-
-          <div className="flex items-center gap-3">
-             <div className="relative">
-                <button 
-                  onClick={() => { audioManager.playClick(); setIsLangMenuOpen(!isLangMenuOpen); }}
-                  className={`flex items-center gap-2 h-8 pl-3 pr-2 rounded bg-zinc-900 border transition-all duration-200 group ${isLangMenuOpen ? 'border-green-500 text-white' : 'border-zinc-800 text-zinc-400 hover:border-zinc-700'}`}
-                >
-                    <Globe className={`w-3.5 h-3.5 transition-colors ${isLangMenuOpen ? 'text-green-500' : 'text-zinc-500'}`} />
-                    <span className="text-[10px] font-bold font-display uppercase tracking-widest">{lang === 'en' ? 'EN' : 'AR'}</span>
-                </button>
-
-                {isLangMenuOpen && (
-                  <>
-                    <div className="fixed inset-0 z-30" onClick={() => { audioManager.playClick(); setIsLangMenuOpen(false); }} />
-                    <div className="absolute top-full mt-2 w-32 bg-zinc-950 border border-green-500/30 rounded-lg shadow-[0_0_20px_rgba(0,0,0,0.8)] overflow-hidden z-40 animate-in fade-in slide-in-from-top-2 duration-200 right-0">
-                       <div className="p-1 space-y-0.5">
-                          <button
-                            onClick={() => toggleLanguage('en')}
-                            className={`w-full flex items-center justify-between px-3 py-2 rounded transition-all ${lang === 'en' ? 'bg-green-500/20 text-green-400' : 'text-zinc-400 hover:bg-zinc-900 hover:text-white'}`}
-                          >
-                             <span className="text-[10px] font-bold font-display tracking-widest">ENGLISH</span>
-                          </button>
-                          
-                          <button
-                            onClick={() => toggleLanguage('ar')}
-                            className={`w-full flex items-center justify-between px-3 py-2 rounded transition-all ${lang === 'ar' ? 'bg-green-500/20 text-green-400' : 'text-zinc-400 hover:bg-zinc-900 hover:text-white'}`}
-                          >
-                             <span className="text-[10px] font-bold font-display tracking-widest">ARABIC</span>
-                          </button>
-                       </div>
-                    </div>
-                  </>
-                )}
-             </div>
-          </div>
-        </header>
-
-        <main className="flex-1 overflow-hidden relative">
+        <main className="flex-1 overflow-y-auto custom-scrollbar relative">
             <div 
               className="absolute inset-0 opacity-5 pointer-events-none" 
               style={{ 
-                  backgroundImage: 'linear-gradient(#22c55e 1px, transparent 1px), linear-gradient(90deg, #22c55e 1px, transparent 1px)', 
+                  backgroundImage: 'linear-gradient(var(--primary-color) 1px, transparent 1px), linear-gradient(90deg, var(--primary-color) 1px, transparent 1px)', 
                   backgroundSize: '40px 40px'
               }} 
             />
-            <div className="h-full w-full max-w-lg mx-auto relative z-10">
+            <div className="min-h-full w-full max-w-lg mx-auto relative z-10">
                 {renderContent()}
             </div>
         </main>

@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Platform } from '../types';
 import { Check, ChevronRight, Zap, Lock, Shield, Globe, Cpu, Radio, Target, Terminal, Wifi } from 'lucide-react';
 import { audioManager } from '../utils/audioManager';
@@ -22,28 +23,29 @@ const PlatformSelection: React.FC<PlatformSelectionProps> = ({ onSelect, t }) =>
   const [scanLinePos, setScanLinePos] = useState(0);
   const [isConnecting, setIsConnecting] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [statusText, setStatusText] = useState("LOCATING NODE...");
+  const [statusText, setStatusText] = useState("تحديد موقع العقدة...");
+  const [onlineUsers, setOnlineUsers] = useState(Math.floor(Math.random() * (2500 - 1800) + 1800));
   const canvasRef = useRef<HTMLCanvasElement>(null);
   
   const platforms = [
     {
       id: 'linebet_v1' as Platform,
-      name: 'LINEBET V1',
-      img: 'https://cdn.phototourl.com/free/2026-04-04-99a59818-566a-4094-ab33-2691af5a6756.png',
-      tagline: 'STRATEGIC NODE: ALPHA',
-      status: 'OPTIMIZED',
+      name: 'WINWIN',
+      img: 'https://www.image2url.com/r2/default/images/1776200504700-76a44e57-f905-48c8-b91c-bd0939ae4633.jpeg',
+      tagline: 'عقدة استراتيجية: ألفا',
+      status: 'محسن',
       latency: '14ms',
-      geo: 'GLOBAL',
+      geo: 'عالمي',
       ip: '192.168.1.104'
     },
     {
       id: 'linebet_v2' as Platform,
-      name: 'LINEBET V2',
-      img: 'https://cdn.phototourl.com/free/2026-04-04-99a59818-566a-4094-ab33-2691af5a6756.png',
-      tagline: 'STRATEGIC NODE: BRAVO',
-      status: 'VERIFIED',
+      name: 'GOOBET',
+      img: 'https://www.image2url.com/r2/default/images/1776200548040-627ffa09-024d-4f16-9b09-e24dc2f6b697.png',
+      tagline: 'عقدة استراتيجية: برافو',
+      status: 'مؤكد',
       latency: '18ms',
-      geo: 'REGIONAL',
+      geo: 'إقليمي',
       ip: '172.16.254.1'
     }
   ];
@@ -128,6 +130,17 @@ const PlatformSelection: React.FC<PlatformSelectionProps> = ({ onSelect, t }) =>
 
   useEffect(() => {
     const interval = setInterval(() => {
+      setOnlineUsers(prev => {
+        const change = Math.floor(Math.random() * 11) - 5; // -5 to +5
+        const next = prev + change;
+        return Math.max(1500, Math.min(3000, next));
+      });
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
       setScanLinePos(prev => (prev + 1) % 100);
     }, 50);
     return () => clearInterval(interval);
@@ -144,11 +157,11 @@ const PlatformSelection: React.FC<PlatformSelectionProps> = ({ onSelect, t }) =>
         setProgress(prev => {
           const next = prev + stepValue;
           
-          if (next < 25) setStatusText("ESTABLISHING HANDSHAKE...");
-          else if (next < 50) setStatusText("BYPASSING FIREWALL...");
-          else if (next < 75) setStatusText("SYNCING VIP DATABASE...");
-          else if (next < 95) setStatusText("OPTIMIZING ANALYTICS...");
-          else setStatusText("CONNECTION SECURED");
+          if (next < 25) setStatusText("بدء المصافحة...");
+          else if (next < 50) setStatusText("تجاوز جدار الحماية...");
+          else if (next < 75) setStatusText("مزامنة قاعدة البيانات...");
+          else if (next < 95) setStatusText("تحسين التحليلات...");
+          else setStatusText("تم تأمين الاتصال");
 
           if (next >= 100) {
             clearInterval(timer);
@@ -182,208 +195,149 @@ const PlatformSelection: React.FC<PlatformSelectionProps> = ({ onSelect, t }) =>
   };
 
   return (
-    <div className="flex flex-col h-full px-6 pt-12 pb-10 overflow-y-auto custom-scrollbar animate-in fade-in duration-1000 relative bg-black">
-      {/* Canvas Particle Background */}
-      <canvas 
-        ref={canvasRef} 
-        className="fixed inset-0 pointer-events-none z-0 opacity-40"
-      />
-
-      <div className="fixed inset-0 pointer-events-none opacity-[0.03] z-0" 
-           style={{ backgroundImage: 'radial-gradient(#22c55e 1px, transparent 0)', backgroundSize: '24px 24px' }}></div>
-      
-      <div className="fixed top-4 left-4 w-12 h-12 border-t-2 border-l-2 border-green-500/30 rounded-tl-xl pointer-events-none z-20"></div>
-      <div className="fixed top-4 right-4 w-12 h-12 border-t-2 border-r-2 border-green-500/30 rounded-tr-xl pointer-events-none z-20"></div>
-      <div className="fixed bottom-4 left-4 w-12 h-12 border-b-2 border-l-2 border-green-500/30 rounded-bl-xl pointer-events-none z-20"></div>
-      <div className="fixed bottom-4 right-4 w-12 h-12 border-b-2 border-r-2 border-green-500/30 rounded-br-xl pointer-events-none z-20"></div>
-
-      <div className="text-center mb-10 relative z-10 shrink-0">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-zinc-950 border border-green-500/20 mb-6 shadow-[0_0_20px_rgba(34,197,94,0.1)]">
-           <Radio className="w-3 h-3 text-green-500 animate-pulse" />
-           <span className="text-[9px] font-black text-green-500 tracking-[0.25em] uppercase font-mono">Neural Interface Standby</span>
-        </div>
-        
-        <h2 className="text-5xl font-display font-black text-white tracking-tighter mb-4 leading-none uppercase">
-          PROTOCOL<br/><span className="text-green-500 drop-shadow-[0_0_10px_rgba(34,197,94,0.5)]">ACCESS</span>
-        </h2>
-        
-        <div className="flex items-center justify-center gap-3 opacity-40">
-           <div className="h-[1px] w-8 bg-green-500"></div>
-           <p className="text-[10px] text-zinc-400 font-bold tracking-widest uppercase">Target Selection</p>
-           <div className="h-[1px] w-8 bg-green-500"></div>
-        </div>
+    <div className="flex flex-col relative bg-[#020202] font-mono">
+      {/* Background Matrix/Grid Layer */}
+      <div className="absolute inset-0 z-0 opacity-20">
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(var(--primary-color-rgb),0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(var(--primary-color-rgb),0.1)_1px,transparent_1px)] bg-[size:30px_30px]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-green-500/5 via-transparent to-green-500/5" />
       </div>
 
-      <div className="flex flex-col gap-6 mb-10 relative z-10 shrink-0">
-        {platforms.map((p, idx) => (
-          <button 
-            key={p.id}
-            onClick={() => handlePlatformSelect(p.id)}
-            disabled={isConnecting}
-            className={`group relative flex flex-col overflow-hidden rounded-[2rem] border-2 transition-all duration-500 text-left animate-in fade-in slide-in-from-bottom-4 fill-mode-both`}
-            style={{ animationDelay: `${idx * 150}ms` }}
-          >
-            <div className={`absolute inset-0 transition-all duration-500 ${
-              selected === p.id 
-                ? 'bg-zinc-950 opacity-100' 
-                : 'bg-zinc-900/10 opacity-100 group-hover:bg-zinc-900/30'
-            }`} />
-            
-            <div className={`absolute inset-0 border-2 transition-all duration-500 rounded-[2rem] ${
-              selected === p.id 
-                ? 'border-green-500 shadow-[0_0_50px_rgba(34,197,94,0.25)] scale-[1.02]' 
-                : 'border-zinc-900 group-hover:border-zinc-700 hover:scale-[1.01]'
-            }`} />
+      {/* Header Section - Redesigned to Compact Pill Shape */}
+      <div className="fixed top-6 left-1/2 -translate-x-1/2 z-50">
+        <header className="flex items-center gap-3 px-5 py-1.5 bg-zinc-900/90 backdrop-blur-xl border border-green-500/30 rounded-full shadow-[0_0_15px_rgba(var(--primary-color-rgb),0.2)]">
+          <div className="w-1.5 h-1.5 rounded-full bg-green-500 shadow-[0_0_8px_var(--primary-color)] animate-pulse" />
+          <span className="text-[9px] text-white/70 font-black tracking-widest uppercase">المتصلين:</span>
+          <span className="text-sm text-green-500 font-mono font-black tabular-nums tracking-tight">
+            {onlineUsers.toLocaleString()}
+          </span>
+        </header>
+      </div>
 
-            {selected === p.id && (
-              <div 
-                className="absolute inset-x-0 h-[1px] bg-green-500/50 shadow-[0_0_15px_#22c55e] z-30 pointer-events-none opacity-50"
-                style={{ top: `${scanLinePos}%` }}
-              />
-            )}
+      {/* Main Selection Area - Dual Core Layout */}
+      <main className="relative z-10 flex flex-col items-center px-6 gap-12 pt-32">
+        <div className="grid grid-cols-1 gap-12 w-full max-w-sm">
+          {platforms.map((p, idx) => (
+            <button
+              key={p.id}
+              onClick={() => handlePlatformSelect(p.id)}
+              disabled={isConnecting}
+              className="relative group outline-none"
+            >
+              {/* Selection Ring */}
+              <AnimatePresence>
+                {selected === p.id && (
+                  <motion.div 
+                    initial={{ opacity: 0, scale: 0.8, rotate: 0 }}
+                    animate={{ opacity: 1, scale: 1.1, rotate: 360 }}
+                    exit={{ opacity: 0, scale: 0.8 }}
+                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                    className="absolute -inset-8 border border-dashed border-green-500/20 rounded-full pointer-events-none"
+                  />
+                )}
+              </AnimatePresence>
 
-            <div className="flex items-center p-6 gap-6 relative z-10 transition-transform duration-500 group-active:scale-[0.98]">
-              <div className={`relative w-28 h-28 rounded-2xl overflow-hidden shrink-0 border-2 transition-all duration-500 ${selected === p.id ? 'border-green-500 shadow-lg' : 'border-zinc-800 grayscale opacity-50 group-hover:opacity-80 group-hover:grayscale-0'}`}>
-                <img 
-                  src={p.img} 
-                  alt={p.name} 
-                  className={`w-full h-full object-cover transition-transform duration-1000 ${selected === p.id ? 'scale-110' : 'scale-100 group-hover:scale-105'}`} 
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-                <div className={`absolute bottom-2 inset-x-2 py-0.5 rounded-md text-[7px] font-black text-center uppercase tracking-tighter ${selected === p.id ? 'bg-green-500 text-black' : 'bg-zinc-800 text-zinc-400'}`}>
-                   {p.status}
-                </div>
-              </div>
-              
-              <div className="flex-1 space-y-3 min-w-0 transition-all duration-500">
-                <div className="flex items-center justify-between">
-                   <h3 className={`text-3xl font-display font-black tracking-tighter transition-colors ${selected === p.id ? 'text-white' : 'text-zinc-600 group-hover:text-zinc-300'}`}>{p.name}</h3>
-                   {selected === p.id && <Zap className="w-5 h-5 text-green-500 fill-green-500 animate-pulse" />}
-                </div>
-                
-                <div className="space-y-2">
-                   <div className="flex items-center gap-2">
-                      <div className="flex-1 h-1 bg-zinc-900 rounded-full overflow-hidden">
-                         <div className={`h-full bg-green-500 transition-all duration-1000 ${selected === p.id ? 'w-full' : 'w-0'}`}></div>
-                      </div>
-                      <span className="text-[8px] font-mono text-zinc-500 tracking-tighter">{p.latency}</span>
-                   </div>
-                   
-                   <div className="flex justify-between items-center opacity-60">
-                      <span className="text-[9px] font-mono text-zinc-500 uppercase tracking-widest">{p.tagline}</span>
-                      <div className="flex items-center gap-1">
-                         <Globe className="w-2.5 h-2.5 text-zinc-500" />
-                         <span className="text-[8px] font-mono text-zinc-500">{p.geo}</span>
-                      </div>
-                   </div>
-                </div>
-              </div>
-
-              <div className={`w-12 h-12 rounded-2xl border-2 flex items-center justify-center transition-all duration-500 ${
-                selected === p.id ? 'bg-green-500 border-green-500 text-black shadow-[0_0_20px_rgba(34,197,94,0.4)] rotate-0' : 'border-zinc-800 text-zinc-800 group-hover:border-zinc-600 group-hover:text-zinc-600'
+              <div className={`relative flex items-center gap-6 p-6 rounded-[2rem] border-2 transition-all duration-500 ${
+                selected === p.id 
+                  ? 'bg-green-500/5 border-green-500 shadow-[0_0_40px_rgba(34,197,94,0.15)]' 
+                  : 'bg-zinc-900/40 border-zinc-800 hover:border-zinc-700'
               }`}>
-                {selected === p.id ? <Check className="w-7 h-7 stroke-[4px]" /> : <Lock className="w-5 h-5" />}
-              </div>
-            </div>
-
-            <div className={`px-6 py-2 border-t flex justify-between items-center bg-black/40 transition-colors z-10 ${selected === p.id ? 'border-green-500/20' : 'border-zinc-900 group-hover:border-zinc-800'}`}>
-                <div className="flex gap-4">
-                   <div className="flex items-center gap-1">
-                      <Cpu className={`w-2.5 h-2.5 transition-colors ${selected === p.id ? 'text-green-500' : 'text-zinc-800 group-hover:text-zinc-600'}`} />
-                      <span className="text-[7px] font-mono text-zinc-700 group-hover:text-zinc-500">PROC: V.8.2</span>
-                   </div>
-                   <div className="flex items-center gap-1">
-                      <Shield className={`w-2.5 h-2.5 transition-colors ${selected === p.id ? 'text-green-500' : 'text-zinc-800 group-hover:text-zinc-600'}`} />
-                      <span className="text-[7px] font-mono text-zinc-700 group-hover:text-zinc-500">SEC: ACTIVE</span>
-                   </div>
+                {/* Hexagon/Circle Image Container */}
+                <div className="relative shrink-0">
+                  <div className={`w-24 h-24 rounded-2xl overflow-hidden border-2 transition-all duration-500 ${
+                    selected === p.id ? 'border-green-500 shadow-[0_0_20px_rgba(34,197,94,0.4)]' : 'border-zinc-800 grayscale opacity-40'
+                  }`}>
+                    <img src={p.img} alt={p.name} className="w-full h-full object-cover" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                  </div>
+                  
+                  {/* Status Indicator Dot */}
+                  <div className={`absolute -top-1 -right-1 w-4 h-4 rounded-full border-2 border-black flex items-center justify-center ${
+                    selected === p.id ? 'bg-green-500' : 'bg-zinc-800'
+                  }`}>
+                    {selected === p.id && <Check className="w-2 h-2 text-black stroke-[4px]" />}
+                  </div>
                 </div>
-                <div className="flex items-center gap-1">
-                   <Target className={`w-2.5 h-2.5 transition-all ${selected === p.id ? 'text-green-500 animate-spin' : 'text-zinc-800 group-hover:text-zinc-600'}`} />
-                   <span className="text-[7px] font-mono text-zinc-700 tracking-tighter group-hover:text-zinc-500">BITRATE: 4096 KBPS</span>
+
+                <div className="flex-1 text-left space-y-2">
+                  <div className="flex items-center justify-between">
+                    <h3 className={`text-2xl font-black tracking-tighter transition-colors ${
+                      selected === p.id ? 'text-white' : 'text-zinc-600'
+                    }`}>{p.name}</h3>
+                    <span className={`text-[8px] font-mono px-2 py-0.5 rounded border ${
+                      selected === p.id ? 'border-green-500/40 text-green-500' : 'border-zinc-800 text-zinc-800'
+                    }`}>{p.latency}</span>
+                  </div>
+                  <p className={`text-[9px] uppercase tracking-widest font-bold transition-colors ${
+                    selected === p.id ? 'text-green-500/60' : 'text-zinc-800'
+                  }`}>{p.tagline}</p>
+                  
+                  {/* Technical Mini-Graph */}
+                  <div className="flex gap-1 h-3 items-end">
+                    {[...Array(8)].map((_, i) => (
+                      <motion.div 
+                        key={i}
+                        animate={{ height: selected === p.id ? [4, 12, 6, 10, 4] : 4 }}
+                        transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.1 }}
+                        className={`w-1 rounded-full ${selected === p.id ? 'bg-green-500' : 'bg-zinc-900'}`}
+                      />
+                    ))}
+                  </div>
                 </div>
-            </div>
-          </button>
-        ))}
-      </div>
-
-      <div className="relative z-10 shrink-0 mt-auto pb-4">
-        <div className={`absolute -inset-4 bg-green-500/10 blur-[40px] rounded-full transition-opacity duration-500 ${selected ? 'opacity-100' : 'opacity-0'}`}></div>
-        <button 
-          onClick={handleProceed}
-          disabled={isConnecting}
-          className="relative w-full h-20 rounded-[2.5rem] bg-white text-black font-black font-display text-lg tracking-[0.4em] uppercase flex items-center justify-center gap-4 shadow-[0_20px_40px_rgba(255,255,255,0.1)] hover:bg-zinc-100 active:scale-[0.97] transition-all group overflow-hidden disabled:opacity-50"
-        >
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-zinc-200 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out"></div>
-          <span className="relative z-10">INITIALIZE SESSION</span>
-          <ChevronRight className="relative z-10 w-7 h-7 group-hover:translate-x-2 transition-transform duration-300" />
-        </button>
-      </div>
-
-      {isConnecting && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-2xl animate-in fade-in duration-500 p-6">
-           <div className="relative w-full max-sm">
-              <div className="absolute -inset-8 bg-green-500/10 blur-[80px] rounded-full animate-pulse"></div>
-              
-              <div className="relative bg-zinc-950 border-2 border-green-500/20 rounded-[3rem] p-10 overflow-hidden shadow-[0_0_100px_rgba(34,197,94,0.15)] flex flex-col items-center">
-                 <div className="absolute top-0 right-0 p-6 opacity-20">
-                    <Terminal className="w-8 h-8 text-green-500" />
-                 </div>
-
-                 <div className="relative mb-12">
-                    <div className="w-24 h-24 bg-zinc-900 border-2 border-green-500/30 rounded-[2rem] flex items-center justify-center relative z-10">
-                       <Wifi className="w-12 h-12 text-green-500 drop-shadow-[0_0_10px_rgba(34,197,94,0.5)] animate-pulse" />
-                    </div>
-                    <div className="absolute -inset-4 border border-dashed border-green-500/10 rounded-full animate-[spin_15s_linear_infinite]"></div>
-                    <div className="absolute -inset-8 border border-dotted border-green-500/5 rounded-full animate-[spin_25s_linear_infinite_reverse]"></div>
-                 </div>
-
-                 <div className="text-center mb-10 w-full">
-                    <h3 className="text-[10px] font-mono text-zinc-500 uppercase tracking-[0.4em] mb-3">Target Node Connection</h3>
-                    <h2 className="text-4xl font-display font-black text-white tracking-tighter uppercase mb-2">
-                       {selectedNode.name}
-                    </h2>
-                    <div className="flex items-center justify-center gap-2 mb-8">
-                       <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-ping"></div>
-                       <span className="text-[9px] font-mono text-green-500 font-bold tracking-widest uppercase">
-                          IP: {selectedNode.ip}
-                       </span>
-                    </div>
-
-                    <div className="space-y-4">
-                       <div className="flex justify-between items-end px-1">
-                          <span className="text-[10px] font-black text-white tracking-widest font-mono animate-pulse uppercase">
-                             {statusText}
-                          </span>
-                          <span className="text-[14px] font-black text-green-500 font-display">
-                             {Math.round(progress)}%
-                          </span>
-                       </div>
-                       
-                       <div className="h-4 w-full bg-zinc-900/50 rounded-full border border-white/5 overflow-hidden p-1 shadow-inner relative">
-                          <div 
-                            className="h-full bg-gradient-to-r from-green-600 to-green-400 rounded-full transition-all duration-100 ease-out relative shadow-[0_0_15px_rgba(34,197,94,0.5)]"
-                            style={{ width: `${progress}%` }}
-                          >
-                             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full animate-[shimmer_1.5s_infinite]"></div>
-                          </div>
-                       </div>
-                    </div>
-                 </div>
-
-                 <div className="w-full p-4 bg-black/40 border border-zinc-900 rounded-2xl flex flex-col gap-2">
-                    <div className="flex justify-between items-center text-[7px] font-mono text-zinc-600 uppercase tracking-tighter">
-                       <span>Socket: Alpha-7</span>
-                       <span>Handshake: Secured</span>
-                    </div>
-                    <div className="flex justify-between items-center text-[7px] font-mono text-zinc-600 uppercase tracking-tighter">
-                       <span>Latency: {selectedNode.latency}</span>
-                       <span>Packets: 1024b</span>
-                    </div>
-                 </div>
               </div>
-           </div>
+
+              {/* Decorative Coordinates */}
+              <div className="absolute -bottom-4 left-8 flex gap-4 opacity-20">
+                <span className="text-[6px] text-green-500">X: {idx * 142}.22</span>
+                <span className="text-[6px] text-green-500">Y: {idx * 89}.45</span>
+              </div>
+            </button>
+          ))}
         </div>
-      )}
+      </main>
+
+      {/* Footer / Action Area */}
+      <footer className="relative z-10 p-8 pb-12 shrink-0">
+        <div className="flex flex-col gap-6">
+          <div className="flex justify-between items-center px-2">
+            <div className="flex flex-col">
+              <span className="text-[8px] text-zinc-500 uppercase tracking-widest">العقدة النشطة</span>
+              <span className="text-[10px] text-white font-black uppercase tracking-widest">
+                {selectedNode.name}
+              </span>
+            </div>
+            <div className="text-right">
+              <span className="text-[8px] text-zinc-500 uppercase tracking-widest">الحالة</span>
+              <div className="flex items-center gap-1.5 justify-end">
+                <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                <span className="text-[10px] text-green-500 font-black uppercase tracking-widest">جاهز</span>
+              </div>
+            </div>
+          </div>
+
+          <button 
+            onClick={handleProceed}
+            disabled={isConnecting}
+            className="group relative w-full h-20 rounded-2xl bg-green-500 text-black font-black text-lg tracking-[0.2em] uppercase flex items-center justify-center gap-4 overflow-hidden transition-all active:scale-95 disabled:opacity-50 shadow-[0_0_20px_rgba(34,197,94,0.3)] hover:shadow-[0_0_30px_rgba(34,197,94,0.5)]"
+          >
+            <div className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
+            <span className="relative z-10 transition-colors">اختيار المنصه</span>
+            <ChevronRight className="relative z-10 w-6 h-6 group-hover:translate-x-2 transition-transform duration-300" />
+          </button>
+
+          <div className="flex justify-center gap-8 opacity-20">
+            <div className="flex items-center gap-2">
+              <Terminal className="w-3 h-3 text-green-500" />
+              <span className="text-[7px] uppercase tracking-widest">وصول المحطة</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Shield className="w-3 h-3 text-green-500" />
+              <span className="text-[7px] uppercase tracking-widest">ارتباط آمن</span>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+      {/* Connection dialog removed per request */}
 
       <style>{`
         @keyframes shimmer {

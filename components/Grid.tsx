@@ -1,6 +1,6 @@
 import React, { useMemo, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Apple, AlertCircle, Scan, Cpu } from 'lucide-react';
+import { Apple, AlertCircle, RotateCcw, Sparkles } from 'lucide-react';
 import { translations } from '../translations';
 import { Language } from '../types';
 
@@ -17,7 +17,6 @@ interface GridProps {
 }
 
 const COLS = 5;
-const COL_LETTERS = ['A', 'B', 'C', 'D', 'E'];
 
 export const Grid: React.FC<GridProps> = ({ path, isAnalyzing, predictionId, rowCount, difficulty, gridData, language }) => {
   const [showSuccessFlash, setShowSuccessFlash] = useState(false);
@@ -56,63 +55,86 @@ export const Grid: React.FC<GridProps> = ({ path, isAnalyzing, predictionId, row
     });
   }, [predictionId, path, rowCount, gridData]);
 
-  const getExtraVisibleIndex = (rowIndex: number, layoutRow: string[]) => {
-      const goodIndices = layoutRow.map((type, idx) => type === 'good' ? idx : -1).filter(idx => idx !== -1);
-      return goodIndices.length === 0 ? -1 : goodIndices[(rowIndex * 7 + 3) % goodIndices.length];
-  };
-
   return (
     <div className="relative w-full mx-auto select-none overflow-hidden h-full flex flex-col">
-      <div className={`flex flex-col gap-1.5 p-1 relative z-10 flex-1 ${showSuccessFlash ? 'brightness-150' : ''}`}>
-        <div className="flex items-center gap-2 mb-2 px-1">
-            <div className="grid grid-cols-5 gap-1.5 flex-1">{COL_LETTERS.map(l => <div key={l} className="flex flex-col items-center"><span className="text-[6px] font-black text-zinc-700 font-mono tracking-[0.25em] uppercase">{l}</span></div>)}</div>
-        </div>
-        <AnimatePresence>
-            {isAnalyzing && (
-                <MotionDiv initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-black/80 rounded-[2rem] overflow-hidden border border-white/20">
-                    <div className="relative z-20 flex flex-col items-center gap-4">
-                        <div className="w-16 h-16 rounded-2xl bg-black/90 border border-white/40 flex items-center justify-center relative">
-                            <Cpu className="w-8 h-8 text-white" />
-                        </div>
-                        <div className="text-center space-y-1">
-                            <h3 className="text-[10px] font-black text-white uppercase tracking-[0.5em] italic">SCANNING_MATRIX</h3>
-                            <p className="text-[7px] font-mono text-white/60 uppercase tracking-widest">bypass_security_node_0x4F</p>
-                        </div>
-                    </div>
-                </MotionDiv>
-            )}
-        </AnimatePresence>
+      <div className={`flex flex-col gap-4 p-2 relative z-10 flex-1 transition-all duration-500 ${showSuccessFlash ? 'brightness-125 scale-[1.02]' : ''}`}>
+        
         {renderRowIndices.map((rowIndex) => {
           const hasSelection = path[rowIndex] !== undefined && path[rowIndex] !== -1;
           const showResult = (hasSelection || (path.length > 0 && path[0] !== -1)) && !isAnalyzing && boardLayout;
           let layoutRow: string[] = [];
-          let extraVisibleIndex = -1;
           if (showResult && boardLayout && boardLayout[rowIndex]) {
               layoutRow = boardLayout[rowIndex];
-              if (difficulty === 'Medium') extraVisibleIndex = getExtraVisibleIndex(rowIndex, layoutRow);
           }
           return (
-            <div key={`row-${rowIndex}`} className="flex items-center gap-2.5">
-              <div className="grid grid-cols-5 gap-1.5 flex-1">
+            <div key={`row-${rowIndex}`} className="flex items-center justify-center">
+              <div className="grid grid-cols-5 gap-3 sm:gap-4 w-full max-w-md">
                 {Array.from({ length: COLS }).map((_, colIndex) => {
                   const cellType = showResult && layoutRow.length > 0 ? layoutRow[colIndex] : 'unknown';
                   const isPath = cellType === 'path';
-                  const isGood = cellType === 'good';
-                  let isVisible = false;
-                  if (showResult && layoutRow.length > 0) {
-                    if (isPath) {
-                      isVisible = true;
-                    }
-                  }
+                  const isVisible = isPath && showResult;
+                  
                   return (
-                    <div key={`cell-${rowIndex}-${colIndex}`} className={`aspect-[1.2/1] w-full flex items-center justify-center relative rounded-xl transition-all duration-300 ${isVisible && showResult ? (isPath ? 'bg-green-500/20 border border-green-500 shadow-[0_0_15px_rgba(34,197,94,0.2)]' : 'bg-zinc-900/50 border border-zinc-800') : 'bg-zinc-900/30 border border-zinc-800/50'}`}>
+                    <div 
+                        key={`cell-${rowIndex}-${colIndex}`} 
+                        className={`aspect-square w-full flex items-center justify-center relative rounded-2xl transition-all duration-700 border-2 overflow-hidden ${isVisible ? 'bg-green-500/20 border-green-500 shadow-[0_0_40px_rgba(var(--primary-color-rgb),0.4)]' : 'bg-white/[0.03] border-white/5 hover:border-white/20'}`}
+                        style={isVisible ? { borderColor: 'var(--primary-color)', backgroundColor: 'rgba(var(--primary-color-rgb), 0.2)' } as any : {}}
+                    >
+                      {/* Internal Cell Glow */}
+                      <div className={`absolute inset-0 opacity-20 bg-gradient-to-br from-white/10 to-transparent ${isVisible ? 'animate-pulse' : ''}`} />
                       
-                      {isVisible && showResult ? (
-                        <MotionDiv initial={{ scale: 0.5, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 0.3 }} className="w-full h-full flex items-center justify-center p-2">
-                          <Apple className={`w-[70%] h-[70%] ${isPath ? 'text-green-500 fill-green-500/20' : 'text-zinc-700'}`} />
+                      {isVisible ? (
+                        <MotionDiv 
+                            initial={{ scale: 0, rotate: -90, opacity: 0 }} 
+                            animate={{ scale: 1, rotate: 0, opacity: 1 }} 
+                            transition={{ type: 'spring', damping: 15, stiffness: 200 }}
+                            className="w-full h-full flex items-center justify-center p-2 relative z-10"
+                        >
+                          <div className="relative">
+                            <motion.div 
+                              animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.6, 0.3] }}
+                              transition={{ duration: 2, repeat: Infinity }}
+                              className="absolute -inset-6 bg-green-500/40 blur-2xl rounded-full" 
+                              style={{ backgroundColor: 'rgba(var(--primary-color-rgb), 0.4)' } as any} 
+                            />
+                            <Apple className="w-10 h-10 sm:w-12 sm:h-12 text-green-500 drop-shadow-[0_0_15px_rgba(var(--primary-color-rgb),0.8)]" style={{ color: 'var(--primary-color)' } as any} />
+                          </div>
                         </MotionDiv>
                       ) : (
-                        <div className={`w-1.5 h-1.5 rounded-full ${isAnalyzing ? 'bg-green-500 animate-pulse' : 'bg-zinc-800'}`} />
+                        <div className="relative flex items-center justify-center w-full h-full">
+                          <motion.div 
+                              animate={isAnalyzing ? { 
+                                  scale: [1, 1.5, 1],
+                                  opacity: [0.1, 0.5, 0.1],
+                                  backgroundColor: ['rgba(255,255,255,0.1)', 'rgba(var(--primary-color-rgb), 0.5)', 'rgba(255,255,255,0.1)']
+                              } : {}}
+                              transition={{ duration: 1.5, repeat: Infinity, delay: (rowIndex * 5 + colIndex) * 0.05 }}
+                              className={`w-1.5 h-1.5 rounded-full transition-all duration-500 ${isAnalyzing ? 'shadow-[0_0_15px_var(--primary-color)]' : 'bg-white/10'}`} 
+                              style={isAnalyzing ? { backgroundColor: 'var(--primary-color)' } : {}} 
+                          />
+                          {/* Tech Corner Accents */}
+                          <div className="absolute top-1 left-1 w-1 h-1 border-t border-l border-white/10" />
+                          <div className="absolute bottom-1 right-1 w-1 h-1 border-b border-r border-white/10" />
+                        </div>
+                      )}
+
+                      {/* Success Particles */}
+                      {isVisible && (
+                        <div className="absolute inset-0 pointer-events-none">
+                          {[...Array(6)].map((_, i) => (
+                              <motion.div
+                                  key={i}
+                                  initial={{ scale: 0, x: 0, y: 0 }}
+                                  animate={{ 
+                                      scale: [0, 1, 0],
+                                      x: (Math.random() - 0.5) * 40,
+                                      y: (Math.random() - 0.5) * 40
+                                  }}
+                                  transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.2 }}
+                                  className="absolute top-1/2 left-1/2 w-1 h-1 bg-yellow-400 rounded-full blur-[1px]"
+                              />
+                          ))}
+                        </div>
                       )}
                     </div>
                   );
@@ -122,19 +144,35 @@ export const Grid: React.FC<GridProps> = ({ path, isAnalyzing, predictionId, row
           );
         })}
       </div>
-      {isFailure && (
-        <div className="absolute inset-0 z-[60] flex flex-col items-center justify-center bg-black/95 rounded-[2.5rem] p-10 text-center border-2 border-green-500/30">
-            <div className="w-20 h-20 rounded-3xl bg-green-500/10 border border-green-500/40 flex items-center justify-center mb-8">
-                <AlertCircle className="w-10 h-10 text-green-500" />
-            </div>
-            <h3 className="text-xl font-black text-white uppercase mb-3 italic font-en tracking-[0.3em]">LINK_FAILURE</h3>
-            <p className="text-zinc-400 text-[9px] font-mono uppercase tracking-[0.25em] max-w-[200px] leading-relaxed mb-8">{t.matrixFailureMsg || 'Matrix link failure detected.'}</p>
-            <button onClick={() => { window.location.reload(); }} className="w-full max-w-[180px] py-5 bg-green-500 text-black font-black text-[9px] uppercase tracking-[0.4em] rounded-2xl active:scale-95 transition-all flex items-center justify-center gap-3">
-                <Scan className="w-4 h-4" />
-                <span>{t.retrySync || 'Retry Sync'}</span>
-            </button>
-        </div>
-      )}
+
+      {/* Failure Overlay */}
+      <AnimatePresence>
+        {isFailure && (
+            <MotionDiv 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 20 }}
+                className="absolute inset-0 z-[60] flex flex-col items-center justify-center bg-black/90 backdrop-blur-2xl p-8 text-center"
+            >
+                <div className="w-20 h-20 rounded-3xl bg-red-500/10 border border-red-500/20 flex items-center justify-center mb-6">
+                    <AlertCircle className="w-10 h-10 text-red-500" />
+                </div>
+                <h3 className="text-2xl font-black text-white mb-2">
+                    {language === 'ar' ? 'عذراً، حاول مرة أخرى' : 'Oops, Try Again'}
+                </h3>
+                <p className="text-zinc-400 text-sm font-medium mb-8 max-w-[240px]">
+                    {language === 'ar' ? 'حدث خطأ في الاتصال، يرجى إعادة المحاولة' : 'Connection error occurred, please try again.'}
+                </p>
+                <button 
+                    onClick={() => { window.location.reload(); }} 
+                    className="w-full max-w-[200px] h-16 bg-white text-black font-black text-sm uppercase tracking-widest rounded-2xl active:scale-95 transition-all flex items-center justify-center gap-3 shadow-2xl"
+                >
+                    <RotateCcw className="w-5 h-5" />
+                    <span>{language === 'ar' ? 'إعادة المحاولة' : 'Try Again'}</span>
+                </button>
+            </MotionDiv>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
